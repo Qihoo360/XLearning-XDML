@@ -15,7 +15,6 @@ XDML内化了学界最新研究成果，在效果保持稳定的同时，能大�
 
 欢迎对机器学习或分布式有兴趣的同仁一起贡献代码，提交Issues或者Pull Requests。
 
-
 ## 架构设计
 ![architecture](./doc/img/xdml.png)
 
@@ -97,17 +96,28 @@ XDML中利用[Scope](https://arxiv.org/pdf/1602.00133.pdf)优化算法进行训�
  - H2OMLP
 
 ### 8.example
-XDML中作业提交实例，包括以下demo：
-
-[Example：](./doc/Example.md)
-
- - LRTest
- - FTRLTest
- - FFMTest
- - ...
+XDML中作业提交实例，可以参考[Example](./doc/Example.md).
 
 ## 编译&部署指南
 
+XDML是基于Kudu、HazelCast以及Hadoop生态圈的一款基于参数服务器的，采用专门缓存机制的分布式机器学习平台。
+####环境依赖
+- centos >= 7
+- Jdk >= 1.8
+- Maven >= 3.5.4
+- scala >= 2.11
+- hadoop >= 2.7.3
+- spark >= 2.3.0
+- sparkling-water-core >= 2.3.0
+- kudu >= 1.9
+- HazelCast >= 3.9.3
+####Kudu安装部署
+XDML基于Kudu，请首先部署Kudu。Kudu的安装部署请参考[Kudu](https://github.com/apache/kudu/tree/1.7.0)。
+####源码下载 
+```git clone https://github.com/Qihoo360/XLearning-XDML```
+####编译
+```mvn clean package -Dmaven.test.skip=true```
+编译完成后，在源码根目录的`target`目录下会生成：`xdml-1.0.jar`、`xdml-1.0-jar-with-dependencies.jar`等多个文件，`xdml-1.0.jar`为未加spark、kudu等第三方依赖，`xdml-1.0-jar-with-dependencies.jar`添加了spark、kudu等依赖包。
 
 ## 运行示例
 
