@@ -18,11 +18,11 @@ Transformer算子或者Estimator产生的model，输入输出都是spark datafra
 该算子用于类别型特征进行oneHot或indexing处理。
 
 	val encoder = new CategoryEncoder()
-      			.setInputCols(Array[String])                
-      			.setOutputCols(Array[String])               
-      			.setIndexOnly(Boolean)                      
-	  			.setDropInputCols(Boolean)                  
-	  			.setCategoriesReserved(Int)
+                .setInputCols(Array[String])                
+                .setOutputCols(Array[String])               
+                .setIndexOnly(Boolean)                      
+                .setDropInputCols(Boolean)                  
+                .setCategoriesReserved(Int)
 				
 - 接口说明
 	- setInputCols(Array[String])：指定进行类别型编码的特征列名称
@@ -45,13 +45,13 @@ Transformer算子或者Estimator产生的model，输入输出都是spark datafra
 该算子用于类别型特征进行multiHot处理。
 	
 	val encoder = new MultiCategoryEncoder() 
-      			.setInputCols(Array[String])                      
-      			.setOutputCols(Array[String])                  
-      			.setIndexOnly(Boolean)                            
-	  			.setDropInputCols(Boolean)                        
-	  			.setCategoriesReserved(Int)
-	  			.setDelimiter(String)
-				.setOutputSparse(Boolean)  
+                .setInputCols(Array[String])                      
+                .setOutputCols(Array[String])                  
+                .setIndexOnly(Boolean)                            
+                .setDropInputCols(Boolean)                        
+                .setCategoriesReserved(Int)
+                .setDelimiter(String)
+                .setOutputSparse(Boolean)  
 
 - 接口说明
 	- setInputCols(Array[String])：指定需要进行multiHot的特征列名称
@@ -77,13 +77,13 @@ Transformer算子或者Estimator产生的model，输入输出都是spark datafra
 该算子用于数值型特征(等频)分箱处理。
 
 	 val numericBucketer = new NumericBucketer()
-      					 .setInputCols(Array[String])                      
-      					 .setOutputCols(Array[String])           
-	  					 .setDropInputCols(Boolean)
-						 .setNumBucketsArray(Array[Int])
-						 .setRelativeError(Double)
-						 .setIndexOnly(Boolean)
-						 .setOutputSparse(Boolean)	
+                         .setInputCols(Array[String])                      
+                         .setOutputCols(Array[String])           
+                         .setDropInputCols(Boolean)
+                         .setNumBucketsArray(Array[Int])
+                         .setRelativeError(Double)
+                         .setIndexOnly(Boolean)
+                         .setOutputSparse(Boolean)	
 
 - 接口说明
 	- setInputCols(Array[String])：指定需要进行分箱处理的特征列名称
@@ -109,9 +109,9 @@ Transformer算子或者Estimator产生的model，输入输出都是spark datafra
 该算子用于数值型特征标准化处理。
 	
 	val numericStandardizer = new NumericStandardizer()
-      						.setInputCols(Array[String])             
-      						.setOutputCols(Array[String])
-	  						.setDropInputCols(Boolean)
+                            .setInputCols(Array[String])             
+                            .setOutputCols(Array[String])
+                            .setDropInputCols(Boolean)
 - 接口说明
 	- setInputCols(Array[String])：指定需要进行标准化处理的特征列名称
 	- setOutputCols(Array[String])：指定标准化后的特征列名称，与输入列一一对应
@@ -128,8 +128,8 @@ Transformer算子或者Estimator产生的model，输入输出都是spark datafra
 该算子用于dataframe列重命名，实现对dataframe.withColumnRenamed()接口的transformer封装。
 
 	val columnRenamer = new ColumnRenamer()
-					  .setInputCols(Array[String])             
-      				  .setOutputCols(Array[String])
+                      .setInputCols(Array[String])             
+                      .setOutputCols(Array[String])
 
 - 接口说明
 	- setInputCols(Array[String])：指定需要重命名的特征列名称
@@ -142,7 +142,7 @@ Transformer算子或者Estimator产生的model，输入输出都是spark datafra
 该算子用于dataframe列删除，实现对dataframe.drop()接口的transformer封装。
 	
 	val columnEliminator = new ColumnEliminator()
-						.setInputCols(Array[String])
+                         .setInputCols(Array[String])
 - 接口说明
 	- setInputCols(Array[String])：指定需要删除的特征列名称
 - 调用示例
