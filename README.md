@@ -83,7 +83,7 @@ XDML中特征分析和特征处理模块。
 	- NumericStandardizer
 
 ### 7.model
-XDML中利用南京大学李武军老师提出的[Scope](https://arxiv.org/pdf/1602.00133.pdf)优化算法进行训练的线性模型和[H2O](https://www.h2o.ai/)部分模型的spark pipeline封装。包括以下模型：
+XDML中包含用南京大学李武军老师提出的[Scope](https://arxiv.org/pdf/1602.00133.pdf)优化算法进行训练的线性模型，以及部分[H2O](https://www.h2o.ai/)模型的spark pipeline封装。具体包括以下模型：
 
 [Model：](./doc/Model.md)
 
@@ -168,6 +168,14 @@ XDML基于Kudu，请首先部署Kudu。Kudu的安装部署请参考[Kudu](https:
 
 ## FAQ
 [**XDML常见问题**](./doc/faq_cn.md)
+
+## 参考文献
+XDML参考了学界及工业界诸多优秀成果，对此表示感谢！
+
+- Shen-Yi Zhao, Ru Xiang, Ying-Hao Shi, Peng Gao, Wu-Jun Li, [SCOPE: Scalable Composite Optimization for Learning on Spark](https://arxiv.org/pdf/1602.00133.pdf). AAAI 2017: 2928-2934.
+- Shen-Yi Zhao, Gong-Duo Zhang*, Ming-Wei Li, Wu-Jun Li.[Proximal SCOPE for Distributed Sparse Learning](https://arxiv.org/pdf/1803.05621.pdf).Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), 2018.
+- Shuxin Zheng, Qi Meng, Taifeng Wang, Wei Chen, Zhi-Ming Ma and Tie-Yan Liu, [Asynchronous Stochastic Gradient Descent with Delay Compensation](https://arxiv.org/pdf/1609.08326.pdf), ICML 2017.
+
 
 ## 联系我们
 
