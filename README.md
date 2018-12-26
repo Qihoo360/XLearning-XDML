@@ -83,7 +83,7 @@ XDML中特征分析和特征处理模块。
 	- NumericStandardizer
 
 ### 7.model
-XDML中利用南京大学李武军老师提出的[Scope](https://arxiv.org/pdf/1602.00133.pdf)优化算法进行训练的线性模型和[H2O](https://www.h2o.ai/)部分模型的spark pipeline封装。包括以下模型：
+XDML中包含用南京大学李武军老师提出的[Scope](https://arxiv.org/pdf/1602.00133.pdf)优化算法进行训练的线性模型，以及部分[H2O](https://www.h2o.ai/)模型的spark pipeline封装。具体包括以下模型：
 
 [Model：](./doc/Model.md)
 
