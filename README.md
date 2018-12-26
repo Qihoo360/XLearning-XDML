@@ -169,7 +169,7 @@ XDML基于Kudu，请首先部署Kudu。Kudu的安装部署请参考[Kudu](https:
 ## FAQ
 [**XDML常见问题**](./doc/faq_cn.md)
 
-## 参考论文
+## 参考文献
 XDML参考了学界及工业界诸多优秀成果，对此表示感谢！
 
 - Shen-Yi Zhao, Ru Xiang, Ying-Hao Shi, Peng Gao, Wu-Jun Li, [SCOPE: Scalable Composite Optimization for Learning on Spark](https://arxiv.org/pdf/1602.00133.pdf). AAAI 2017: 2928-2934
