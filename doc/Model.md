@@ -1,4 +1,4 @@
-#模型
+# 模型
 
 XDML模型部分主要包括线性模型和树模型，分为GLM和H2O两个模块。[GLM(Generalized linear model)](https://en.wikipedia.org/wiki/Generalized_linear_model)支持常见的线性模型，包括LR，SVM，[Softmax Regression](https://en.wikipedia.org/wiki/Multinomial_logistic_regression)等模型。H2O模块实现了对[H2O](https://www.h2o.ai/)中[DRF(Distributed Random Forest)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/drf.html)、[GBM(Gradient Boosting Machine)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html)、[GLM(Generalized Linear Model )](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/glm.html)和[MLP(Multilayer Perceptron)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/deep-learning.html)四个模型的pipeline封装。
 
