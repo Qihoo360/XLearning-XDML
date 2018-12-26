@@ -169,6 +169,11 @@ XDML基于Kudu，请首先部署Kudu。Kudu的安装部署请参考[Kudu](https:
 ## FAQ
 [**XDML常见问题**](./doc/faq_cn.md)
 
+## 参考论文
+- Shen-Yi Zhao, Ru Xiang, Ying-Hao Shi, Peng Gao, Wu-Jun Li, [SCOPE: Scalable Composite Optimization for Learning on Spark](https://arxiv.org/pdf/1602.00133.pdf). AAAI 2017: 2928-2934
+- Shuxin Zheng, Qi Meng, Taifeng Wang, Wei Chen, Zhi-Ming Ma and Tie-Yan Liu, [Asynchronous Stochastic Gradient Descent with Delay Compensation](https://arxiv.org/pdf/1609.08326.pdf), ICML 2017
+
+
 ## 联系我们
 
 Mail： <g-xlearning-dev@360.cn>     
