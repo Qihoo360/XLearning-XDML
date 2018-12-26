@@ -1,4 +1,5 @@
-# 模型
+#模型
+
 XDML模型部分主要包括线性模型和树模型，分为GLM和H2O两个模块。[GLM(Generalized linear model)](https://en.wikipedia.org/wiki/Generalized_linear_model)支持常见的线性模型，包括LR，SVM，[Softmax Regression](https://en.wikipedia.org/wiki/Multinomial_logistic_regression)等模型。H2O模块实现了对[H2O](https://www.h2o.ai/)中[DRF(Distributed Random Forest)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/drf.html)、[GBM(Gradient Boosting Machine)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html)、[GLM(Generalized Linear Model )](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/glm.html)和[MLP(Multilayer Perceptron)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/deep-learning.html)四个模型的pipeline封装。
 
 
@@ -20,20 +21,20 @@ XDML模型部分主要包括线性模型和树模型，分为GLM和H2O两个模�
 该算子利用[Scope](https://arxiv.org/pdf/1602.00133.pdf)算法对广义线性模型进行训练，支持LR，SVM，[UPULR](https://arxiv.org/abs/1703.00593)等模型，能在较少的迭代次数取得非常好的模型效果。
 
 	val linearScope = new LinearScope()
-			        .setFeaturesCol(String)
-			        .setLabelCol(String)
-			        .setMaxIter(Int)
-			        .setStepSize(Double)
-			        .setLossFunc(String)
-			        .setRegParam(Double)
-			        .setElasticNetParam(Double)
-			        .setFactor(Double)
-			        .setFitIntercept(Boolean)
-			        .setPosWeight(Double)
-			        .setConvergenceTol(Double)
-			        .setNumPartitions(Int)
-			        .setTreeAggregateDepth(Int)
-			        .setRestartFrequency(Int)
+                    .setFeaturesCol(String)
+                    .setLabelCol(String)
+                    .setMaxIter(Int)
+                    .setStepSize(Double)
+                    .setLossFunc(String)
+                    .setRegParam(Double)
+                    .setElasticNetParam(Double)
+                    .setFactor(Double)
+                    .setFitIntercept(Boolean)
+                    .setPosWeight(Double)
+                    .setConvergenceTol(Double)
+                    .setNumPartitions(Int)
+                    .setTreeAggregateDepth(Int)
+                    .setRestartFrequency(Int)
 
 - 接口说明
 	- setFeaturesCol(String)：指定数据的特征列名称，默认为"features"
@@ -63,7 +64,7 @@ XDML模型部分主要包括线性模型和树模型，分为GLM和H2O两个模�
         
         //------validate--------
         linearScopeModel.setPredictionCol("prediction")            //设置输出df原使预测列名称,String,默认为"prediction"
-						.setProbabilityCol("probability")          //设置输出df概率预测列名称,String,默认为"probability"                                                       	
+                        .setProbabilityCol("probability")          //设置输出df概率预测列名称,String,默认为"probability"                                                       	
   		val dfProcessed = linearScopeModel.transform(validDF)
   
     参考net.qihoo.xitong.xdml.example.analysis.model.runFromLibSVMDataToXDMLLinearScopeModel运行示例
@@ -146,18 +147,18 @@ OVRLinearScope为多分类SVM模型。该模型使用One-VS-Rest策略解决多�
 [DRF(Distributed Random Forest)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/drf.html)，是H2O中随机森林模型。
 
 	val h2oDRF = new H2ODRF()
-		      .setLabelCol(String)
-		      .setCatFeatColNames(Array[String])
-		      .setIgnoreFeatColNames(Array[String])
-		      .setMaxDepth(Int)
-		      .setNumTrees(Int)
-		      .setMaxBinsForCat(Int)
-		      .setMaxBinsForNum(Int)
-		      .setMinInstancesPerNode(Int)
-		      .setCategoricalEncodingScheme(String)
-		      .setHistogramType(String)
-		      .setDistribution(String)
-		      .setScoreTreeInterval(Int)
+               .setLabelCol(String)
+               .setCatFeatColNames(Array[String])
+               .setIgnoreFeatColNames(Array[String])
+               .setMaxDepth(Int)
+               .setNumTrees(Int)
+               .setMaxBinsForCat(Int)
+               .setMaxBinsForNum(Int)
+               .setMinInstancesPerNode(Int)
+               .setCategoricalEncodingScheme(String)
+               .setHistogramType(String)
+               .setDistribution(String)
+               .setScoreTreeInterval(Int)
 
 - 接口说明
 	- setLabelCol(String)：指定数据的标签列名称，用户需要指定标签列名称，否则报错
@@ -190,20 +191,20 @@ OVRLinearScope为多分类SVM模型。该模型使用One-VS-Rest策略解决多�
 [GBM(Gradient Boosting Machine)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html)，是H2O中梯度提升模型。
 
 	val h2oGBM = new H2OGBM()
-		      .setLabelCol(String)
-		      .setCatFeatColNames(Array[String])
-		      .setIgnoreFeatColNames(Array[String])
-		      .setMaxDepth(Int)
-		      .setNumTrees(Int)
-		      .setMaxBinsForCat(Int)
-		      .setMaxBinsForNum(Int)
-		      .setMinInstancesPerNode(Int)
-		      .setCategoricalEncodingScheme(String)
-		      .setHistogramType(String)
-		      .setLearnRate(Double)
-		      .setLearnRateAnnealing(Double)
-		      .setDistribution(String)
-		      .setScoreTreeInterval(Int)
+               .setLabelCol(String)
+               .setCatFeatColNames(Array[String])
+               .setIgnoreFeatColNames(Array[String])
+               .setMaxDepth(Int)
+               .setNumTrees(Int)
+               .setMaxBinsForCat(Int)
+               .setMaxBinsForNum(Int)
+               .setMinInstancesPerNode(Int)
+               .setCategoricalEncodingScheme(String)
+               .setHistogramType(String)
+               .setLearnRate(Double)
+               .setLearnRateAnnealing(Double)
+               .setDistribution(String)
+               .setScoreTreeInterval(Int)
 - 接口说明
 	- setMaxDepth(Int)：设置树深度，默认为5
 	- setMinInstancesPerNode(Int)：设置节点分裂过程中子节点至少包含的样本数量，默认值为10
@@ -228,16 +229,16 @@ OVRLinearScope为多分类SVM模型。该模型使用One-VS-Rest策略解决多�
 [GLM(Generalized Linear Model )](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/glm.html)，是H2O中广义线性模型。
 
 	val h2oGLM = new H2OGLM()
-		      .setLabelCol(String)
-		      .setCatFeatColNames(Array[String])
-		      .setIgnoreFeatColNames(Array[String])
-		      .setFamily(String)
-		      .setMaxIter(Int)
-		      .setAlpha(Double)
-		      .setLambda(Double)
-		      .setFitIntercept(Boolean)
-		      .setStandardization(Boolean)
-		      .setMissingValueHandling(String)
+               .setLabelCol(String)
+               .setCatFeatColNames(Array[String])
+               .setIgnoreFeatColNames(Array[String])
+               .setFamily(String)
+               .setMaxIter(Int)
+               .setAlpha(Double)
+               .setLambda(Double)
+               .setFitIntercept(Boolean)
+               .setStandardization(Boolean)
+               .setMissingValueHandling(String)
 
 - 接口说明
 	- setFamily(String)：设置label的分布类型，默认为"binomial"
@@ -264,23 +265,23 @@ OVRLinearScope为多分类SVM模型。该模型使用One-VS-Rest策略解决多�
 [MLP(Multilayer Perceptron)](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/deep-learning.html)， 是H2O中多层感知器模型。
 
 	val h2oMLP = new H2OMLP()
-		      .setLabelCol(String)
-		      .setCatFeatColNames(Array[String])
-		      .setIgnoreFeatColNames(Array[String])
-		      .setMissingValueHandling(String)
-		      .setCategoricalEncodingScheme(String)
-		      .setDistribution(String)
-		      .setHidden(Array[Int])
-		      .setActivation(String)
-		      .setEpochs(Double)
-		      .setLearnRate(Double)
-		      .setMomentumStart(Double)
-		      .setMomentumStable(Double)
-		      .setL1(Double)
-		      .setL2(Double)
-		      .setHiddenDropoutRatios(Array[Double])
-		      .setElasticAveraging(Boolean)
-		      .setStandardization(Boolean)
+               .setLabelCol(String)
+               .setCatFeatColNames(Array[String])
+               .setIgnoreFeatColNames(Array[String])
+               .setMissingValueHandling(String)
+               .setCategoricalEncodingScheme(String)
+               .setDistribution(String)
+               .setHidden(Array[Int])
+               .setActivation(String)
+               .setEpochs(Double)
+               .setLearnRate(Double)
+               .setMomentumStart(Double)
+               .setMomentumStable(Double)
+               .setL1(Double)
+               .setL2(Double)
+               .setHiddenDropoutRatios(Array[Double])
+               .setElasticAveraging(Boolean)
+               .setStandardization(Boolean)
 - 接口说明
 	- setDistribution(String)：设置分布类型，默认为"bernoulli"
 		- 支持"bernoulli", "multinomial"
