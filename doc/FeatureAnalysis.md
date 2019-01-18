@@ -164,6 +164,28 @@ XDML特征分析模块支持多特征并行、数据one-pass的特征分析，�
 	- 与label相关的分析指标，往往和label的类型相关。例如，auc只能在二分类数据集上进行计算。因此fitSparse()接口内部会对数据集的label进行采样，如果label的值个数超过2个，auc，互信息，相关系数都会置为-1。
 	- 如果数据集没有标签，在hasLabel置为false的情况下，labelColNames可以为任意字符串。
 
+### UniversalAnalyzer.fitDenseKSForNum()
+
+该接口主要实现双样本KS检验（[Kolmogorov–Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)）功能，用户可以通过该接口检验两份样本数据是否服从同一分布。
+
+	def fitDenseKSForNum(df1: DataFrame, numFeatColNames1: Array[String],
+                         df2: DataFrame, numFeatColNames2: Array[String]): Array[Double]
+
+- 输入参数说明
+	- df1: 输入dataframe1
+	- numFeatColNames1: 计算ks统计的列名称
+	- df2: 输入dataframe2
+	- numFeatColNames2: 计算ks统计的列名称
+- 输出结果说明
+	- Array[Double]: 返回零假设的P值（零假设表示样本1和样本2服从同一个分布）
+- 调用示例
+  
+    参考net.qihoo.xitong.xdml.example.analysis.feature.analysis.runUniversalAnalyzerDenseKS 运行示例
+
+- **特别说明**
+	- 此接口只能对数值型特征进行ks检验
+	- numFeatColNames1与numFeatColNames2中的列一一对应进行KS检验
+
 ### UniversalAnalyzer.fitDenseGrouped()
 	fitDenseGrouped(df: DataFrame,
                     labelColName: String,
