@@ -1,11 +1,13 @@
 package net.qihoo.xitong.xdml.feature.analysis
 
 import breeze.numerics.log2
+import org.apache.spark.Partitioner
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{Column, DataFrame, Row}
 import org.apache.spark.sql.catalyst.util.QuantileSummaries
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.types.IntegerType
+
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 
@@ -795,6 +797,67 @@ object UniversalAnalyzer {
 
   }
 
+  ////////////////////////////////////////   Among Features   ///////////////////////////////////////////////////
+
+  private def computeKSParallel(df1: DataFrame, numFeatColNames1: Array[String],
+                        df2: DataFrame, numFeatColNames2: Array[String]): Array[Double] = {
+    val combinedFeatName = numFeatColNames1.zip(numFeatColNames2).map(tuple => tuple._1 + "_" + tuple._2)
+    val bcCombinedFeatName = df1.sparkSession.sparkContext.broadcast(combinedFeatName)
+    val firstDataPrefix = "x"
+    val secondDataPrefix = "y"
+    val delimiter = ":"
+    val cols1 = numFeatColNames1.map { featColName =>
+      col(featColName)
+    }
+    val cols2 = numFeatColNames2.map { featColName =>
+      col(featColName)
+    }
+    val rdd1 = df1.select(cols1: _*).rdd.flatMap { row =>
+      row.toSeq.zip(bcCombinedFeatName.value).map { case (value, featName) =>
+        (featName, firstDataPrefix + delimiter + value)
+      }
+    }
+    val rdd2 = df2.select(cols2: _*).rdd.flatMap { row =>
+      row.toSeq.zip(bcCombinedFeatName.value).map { case (value, featName) =>
+        (featName, secondDataPrefix + delimiter + value)
+      }
+    }
+    val featNameToIndex = combinedFeatName.zipWithIndex.toMap
+    val ksMap = rdd1.union(rdd2)
+      .partitionBy(new KSPartitioner(featNameToIndex.size, featNameToIndex))
+      .mapPartitions { iter =>
+        val x = new ArrayBuffer[Double]()
+        val y = new ArrayBuffer[Double]()
+        val featNameWithValues = iter.toArray
+        val featName = featNameWithValues(0)._1
+        featNameWithValues.foreach { tuple =>
+          val splitedValue = tuple._2.split(delimiter)
+          if (!splitedValue(1).equals("null")) {
+            if (splitedValue(0).contains(firstDataPrefix)) {
+              x += splitedValue(1).toDouble
+            } else if (splitedValue(0).contains(secondDataPrefix)) {
+              y += splitedValue(1).toDouble
+            }
+          }
+        }
+        val ks = new KolmogorovSmirnovTest
+        val ksValue = ks.kolmogorovSmirnovTest(x.toArray, y.toArray)
+        Iterator((featName, ksValue))
+      }
+      .collect().toMap
+
+    combinedFeatName.map { featName =>
+      ksMap(featName)
+    }
+  }
+
+  //WARNING: import net.qihoo.xitong.xdml.feature.analysis.KolmogorovSmirnovTest to avoid version problem when import KolmogorovSmirnovTest.class from jar
+  def fitDenseKSForNum(df1: DataFrame, numFeatColNames1: Array[String],
+                       df2: DataFrame, numFeatColNames2: Array[String]): Array[Double] = {
+    assert(numFeatColNames1.length == numFeatColNames2.length, "Error: Feature Mismatch")
+    computeKSParallel(df1, numFeatColNames1, df2, numFeatColNames2)
+  }
+
   ////////////////////////////////////////   Grouped analysis   ///////////////////////////////////////////////////
   case class GroupFeatSummary(name: String,
                               reversePairRate: Double,
@@ -959,4 +1022,12 @@ object UniversalAnalyzer {
       }
     groupFeatSummaryArray.toArray
   }
+
+  private class KSPartitioner(parts: Int, keyToPartition: Map[String,Int]) extends Partitioner{
+    override def numPartitions: Int = parts
+    override def getPartition(key: Any):Int = {
+      keyToPartition.getOrElse(key.toString, 0)
+    }
+  }
+
 }
