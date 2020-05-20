@@ -182,3 +182,4 @@ XDML参考了学界及工业界诸多优秀成果，对此表示感谢！
 Mail： <g-xlearning-dev@360.cn>     
 QQ群：874050710  
 ![qq](./doc/img/qq.jpg)
+
