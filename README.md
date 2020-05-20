@@ -176,7 +176,6 @@ XDML参考了学界及工业界诸多优秀成果，对此表示感谢！
 - Shen-Yi Zhao, Gong-Duo Zhang, Ming-Wei Li, Wu-Jun Li.[Proximal SCOPE for Distributed Sparse Learning](https://arxiv.org/pdf/1803.05621.pdf).Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), 2018.
 - Shuxin Zheng, Qi Meng, Taifeng Wang, Wei Chen, Zhi-Ming Ma and Tie-Yan Liu, [Asynchronous Stochastic Gradient Descent with Delay Compensation](https://arxiv.org/pdf/1609.08326.pdf), ICML 2017.
 
-
 ## 联系我们
 
 Mail： <g-xlearning-dev@360.cn>     
